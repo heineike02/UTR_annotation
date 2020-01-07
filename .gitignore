@@ -1,0 +1,4 @@
+#ignore checkpoints
+.ipynb_checkpoints/
+__pycache__/
+*.pyc

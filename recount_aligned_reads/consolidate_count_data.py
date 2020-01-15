@@ -11,11 +11,11 @@ import sys
 #
 # usage: consolidate_count_data.py <data_dir> <species_abbrev> <UTR_param>
 # 
-# data_dir: directory where 
+# data_dir: directory where processed_data sequencing data is stored.
 # species_abbrev: 
 #    SC = S. cerevisiae
 #    KL = K. lactis
-# UTR_param: either nag for SC UTRs calculated using Nagalakshmi paper, or a number representing the arbitrary number of bases added on the end of each transcript in the annotation to represent the UTR. This must be included in the filename of the counts files for each sample (e.g. read_counts_UTR_nag.txt
+# UTR_param: either orig for original count data, nag for count data is S. cerevisiae using UTRs calculated using Nagalakshmi paper, or a number representing the arbitrary number of bases added on the end of each transcript in the annotation to represent the UTR. This must be included in the filename of the counts files for each sample (e.g. read_counts_UTR_nag.txt
 #
 #
 # The folder where the data will be moved to will be called
@@ -27,7 +27,11 @@ samples = os.listdir(data_dir + os.sep + "processed_data")
 spec = sys.argv[2]
 UTR_param = sys.argv[3]
 
-UTR_dir = data_dir + os.sep + 'counts_UTR_'+spec+'_'+UTR_param
+
+if UTR_param == 'orig':
+    UTR_dir = data_dir + os.sep + 'counts_' + spec + '_orig'
+else: 
+    UTR_dir = data_dir + os.sep + 'counts_' + spec + '_UTR_' + UTR_param
        
 os.system('mkdir ' + UTR_dir)
 
@@ -35,10 +39,17 @@ for sample in samples:
     sample_spec = sample.split('_')[0]
     sample_no = sample.split('_')[1]
     if (sample_spec==spec):
-        UTR_file_ext = os.sep + "processed_data" + os.sep + sample + os.path.normpath("/star_out/B" + sample_no + "_S" + str(int(sample_no)) +"_L001_R1_001.fastq.gz/read_counts_UTR_" + UTR_param + ".txt")
+        if UTR_param == 'orig': 
+            UTR_file_ext = os.sep + "processed_data" + os.sep + sample + os.path.normpath("/star_out/B" + sample_no + "_S" + str(int(sample_no)) +"_L001_R1_001.fastq.gz/read_counts_orig.txt")
+        else:
+            UTR_file_ext = os.sep + "processed_data" + os.sep + sample + os.path.normpath("/star_out/B" + sample_no + "_S" + str(int(sample_no)) +"_L001_R1_001.fastq.gz/read_counts_UTR_" + UTR_param + ".txt")
+        
         UTR_file = data_dir + UTR_file_ext
 
-        cp_cmd = 'cp ' + UTR_file + ' ' + UTR_dir + os.sep + 'read_counts_UTR_'+UTR_param + "_" + sample + '.txt'
+        if UTR_param == 'orig': 
+            cp_cmd = 'cp ' + UTR_file + ' ' + UTR_dir + os.sep + 'read_counts_orig_' + sample + '.txt'
+        else: 
+            cp_cmd = 'cp ' + UTR_file + ' ' + UTR_dir + os.sep + 'read_counts_UTR_'+UTR_param + "_" + sample + '.txt'
         
         os.system('echo ' + sample)  
         #os.system("echo '" + cp_cmd + "'")

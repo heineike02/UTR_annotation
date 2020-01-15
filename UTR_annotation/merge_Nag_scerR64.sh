@@ -1,5 +1,7 @@
 #!/bin/bash 
 
+#Uses bedtools to sort combined UTR and annotation file and then merges the coordinates of the UTR and previous gene to get new coordinates for gene.  
+#
 #Inputs: 
 #
 #fname_base (e.g. /home/heineike/genomes/scer_20181114/saccharomyces_cerevisiae_R64-2-1_20150113)

@@ -14,7 +14,7 @@ Run `UTR_annotation/Scer_utr_annotation.ipynb` in jupyter.
 Required data files: 
 
 * `saccharomyces_cerevisiae_R64-2-1_20150113.gff` : original annotation file downloaded from SGD
-* `Nagalakshmi_2002_3UTRs_V64.gff3` : 3' UTR annotation file downloaded from SGD
+* `Nagalakshmi_2008_3UTRs_V64.gff3` : 3' UTR annotation file downloaded from SGD
 
 Final output file: 
 
@@ -56,6 +56,17 @@ Moves all the new count data to a new folder.
 
 Coming Soon
 	
+
+
+## Environment notes
+
+Conda environment specification is located in the environment.yml file
+
+In order to use the environment on Jupyterhub you may need to install the kernal after activating the environment: 
+
+`. activate UTR_generation`
+`python -m ipykernel install --user --name UTR_generation`
+
 
 
 ## References

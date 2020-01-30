@@ -1,0 +1,13 @@
+name: UTR_generation
+channels: 
+  - defaults
+  - bioconda
+  - conda-forge
+dependencies:
+  - numpy
+  - pandas
+  - gffutils==0.10.*
+  - seaborn
+  - matplotlib
+  - jupyter
+  - conda-forge::biopython

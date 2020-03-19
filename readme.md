@@ -62,10 +62,17 @@ Coming Soon
 
 Conda environment specification is located in the environment.yml file
 
+To update use:
+`conda env update --file ./github/UTR_annotation/environment.yml --prune`
+
+The argument `--prune` gets rid of packages that are no longer necessary
+
 In order to use the environment on Jupyterhub you may need to install the kernal after activating the environment: 
 
 `. activate UTR_generation`
 `python -m ipykernel install --user --name UTR_generation`
+
+Note: For static image export from plotly would need to add the packages `plotly-orca`, `psutil`, and `requests`
 
 
 
